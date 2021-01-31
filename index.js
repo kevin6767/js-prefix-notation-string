@@ -10,30 +10,44 @@ Example:
 "+ + 12 16 * 10 4" => 68 // This is ((12+16)+(10*4))
 */
 
-function cuttingString(list) {
-	let flippedArr = list.split(' ')
-	let topper = []
+function prefixEval(expression) {
+	let temp = expression.split(' ')
+	let expr = temp.reverse()
+	let stack = []
 
-	if (flippedArr === '') {
-		return 'this isnt working'
-	}
-	for (let i = 0; i < flippedArr.length; i++) {
-		topper.push(flippedArr[i])
-		let j = parseInt(topper.pop())
-		let k = parseInt(topper.pop())
+	for (let i = 0; i < expr.length; i++) {
+		if (
+			expr[i] === '+' ||
+			expr[i] === '-' ||
+			expr[i] === '/' ||
+			expr[i] === '*'
+		) {
+			let j = stack.pop()
+			let k = stack.pop()
 
-		if (flippedArr[i] === '*') {
-			topper.push(j + k)
-		} else if (flippedArr[i] === '/') {
-			topper.push(j / k)
-		}
-		if (flippedArr[i] === '+') {
-			topper.push(j + k)
-		} else if (flippedArr[i] === '-') {
-			topper.push(j - k)
+			let temp = checkOperator(parseInt(j), parseInt(k), expr[i])
+
+			stack.push(temp)
+		} else {
+			stack.push(expr[i])
 		}
 	}
-	return topper[0]
+	return stack
 }
 
-cuttingString('+ + 12 16 * 10 4')
+function checkOperator(a, b, op) {
+	switch (op) {
+		case '+':
+			return a + b
+		case '-':
+			return b - a
+		case '/':
+			return b / a
+		case '*':
+			return a * b
+		default:
+			return 'this is not correct'
+	}
+}
+
+console.log(prefixEval('+ + 1 2 30'))

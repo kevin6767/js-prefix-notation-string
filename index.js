@@ -16,11 +16,9 @@ function prefixEval(expression) {
 		) {
 			let j = stack.pop()
 			let k = stack.pop()
-
 			let temp = checkOperator(parseInt(j), parseInt(k), expr[i])
 
 			stack.push(temp)
-			console.log(stack)
 		} else {
 			stack.push(expr[i])
 		}
@@ -31,16 +29,24 @@ function prefixEval(expression) {
 function checkOperator(a, b, op) {
 	switch (op) {
 		case '+':
+			console.log('adding' + ' ' + a + ' ' + op + ' ' + b)
+			console.log(a + b)
 			return a + b
 		case '-':
+			console.log('subtracting' + ' ' + a + ' ' + op + ' ' + b)
+			console.log(a - b)
 			return a - b
 		case '/':
+			console.log('dividing' + ' ' + a + ' ' + op + ' ' + b)
+			console.log(a / b)
 			return a / b
 		case '*':
+			console.log('multiplying' + ' ' + a + ' ' + op + ' ' + b)
+			console.log(a * b)
 			return a * b
 		default:
 			return 'this is not correct'
 	}
 }
 
-console.log(prefixEval('+ / * 1 3 + 12 16 * 10 4'))
+console.log(prefixEval('+ + 12 16 * 10 4'))

@@ -16,7 +16,7 @@ function prefixEval(expression) {
 		) {
 			let j = stack.pop()
 			let k = stack.pop()
-			let temp = checkOperator(parseInt(j), parseInt(k), expr[i])
+			let temp = checkOperator(parseFloat(j), parseFloat(k), expr[i])
 
 			stack.push(temp)
 		} else {
@@ -49,4 +49,4 @@ function checkOperator(a, b, op) {
 	}
 }
 
-console.log(prefixEval('+ + 12 16 * 10 4'))
+console.log(prefixEval('+ / * 1 3 + 12 16 * 10 4'))
